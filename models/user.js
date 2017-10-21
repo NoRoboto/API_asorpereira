@@ -1,11 +1,15 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+// Required modules
+var mongoose = require('mongoose')
 
-var userSchema = new Schema({
-  name: String,
-  id: String
-});
+var userSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true, maxlength: 60 },
+    id: { type: String, required: true, unique: true },
+    type: { type: String, default: '' },
+    rol: { type: String, default: '' }
+  },
+  { timestamps: true }
+)
 
-var User = mongoose.model('User',userSchema);
-
-module.exports = User;
+// Export the model
+module.exports = mongoose.model('user', userSchema)
